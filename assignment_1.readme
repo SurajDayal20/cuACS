@@ -1,0 +1,9 @@
+Names and Student Numbers: Suraj Dayal - 101013656, Harsaan Nithiananthan - 100942402, Thinusan Ratnavel - 100939542, Menna Mohsen - 101007934 
+
+How to run Program: 
+
+cd cuACS 
+make
+./cuACS
+
+How to use Program: Currently only staff members can login. Login with the username "staffMember1" and the password "staffMember1". Currently can only view, add and delete animals. Client functionality is not implemented. When wanting to view all the animals must press "Load Table". Any empty fields when adding a new animal will be set to a default value.

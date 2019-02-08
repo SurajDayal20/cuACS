@@ -1,0 +1,175 @@
+#include "addanimalpage.h"
+#include "ui_addanimalpage.h"
+
+addanimalpage::addanimalpage(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::addanimalpage)
+{
+    ui->setupUi(this);
+}
+
+addanimalpage::~addanimalpage()
+{
+    delete ui;
+}
+
+void addanimalpage::on_buttonBox_accepted()
+{
+    QString name, type, breed, gender, personality, diet, environment, timeDedication, costDedication;
+    qint8 age, lifespan, noise, intelligence, adaptability, pastOwners, reproductability, appetite, energyLevel, weight, height;
+    bool medication;
+
+    name = ui->lineName->text();
+    type = ui->lineType->text();
+    breed = ui->lineBreed->text();
+    age = ui->lineAge->maxLength();
+    lifespan = ui->lineLifespan->maxLength();
+    pastOwners = ui->lineOwners->maxLength();
+    timeDedication = ui->lineTime->text();
+    costDedication = ui->lineCost->text();
+    weight = ui->lineWeight->maxLength();
+    height = ui->lineHeight->maxLength();
+
+    if (ui->radioButton_Male->isCheckable()){
+        gender = "Male";
+    }
+    if (ui->radioButton_Female->isCheckable()){
+        gender = "Female";
+    }
+    if (ui->radioButton_Other->isCheckable()){
+        gender = "Other";
+    }
+    if (ui->radioButton_Noise_1->isCheckable()){
+        noise = 1;
+    }
+    if (ui->radioButton_Noise_2->isCheckable()){
+        noise = 2;
+    }
+    if (ui->radioButton_Noise_3->isCheckable()){
+        noise = 3;
+    }
+    if (ui->radioButton_Noise_4->isCheckable()){
+        noise = 4;
+    }
+    if (ui->radioButton_Noise_5->isCheckable()){
+        noise = 5;
+    }
+    if (ui->radioButton_Intelligence_1->isCheckable()){
+        intelligence = 1;
+    }
+    if (ui->radioButton_Intelligence_2->isCheckable()){
+        intelligence = 2;
+    }
+    if (ui->radioButton_Intelligence_3->isCheckable()){
+        intelligence = 3;
+    }
+    if (ui->radioButton_Intelligence_4->isCheckable()){
+        intelligence = 4;
+    }
+    if (ui->radioButton_Intelligence_5->isCheckable()){
+        intelligence = 5;
+    }
+    if (ui->radioButton_Adapt_1->isCheckable()){
+        adaptability = 1;
+    }
+    if (ui->radioButton_Adapt_2->isCheckable()){
+        adaptability = 2;
+    }
+    if (ui->radioButton_Adapt_3->isCheckable()){
+        adaptability = 3;
+    }
+    if (ui->radioButton_Adapt_4->isCheckable()){
+        adaptability = 4;
+    }
+    if (ui->radioButton_Adapt_5->isCheckable()){
+        adaptability = 5;
+    }
+    if (ui->radioButton_Introvert->isCheckable()){
+        personality = "Introvert";
+    }
+    if (ui->radioButton_Ambivert->isCheckable()){
+        personality = "Ambivert";
+    }
+    if (ui->radioButton_Extrovert->isCheckable()){
+        personality = "Extrovert";
+    }
+    if (ui->radioButton_Carnivore->isCheckable()){
+        diet = "Carnivore";
+    }
+    if (ui->radioButton_Omnivore->isCheckable()){
+        diet = "Omnivore";
+    }
+    if (ui->radioButton_Herbivore->isCheckable()){
+        diet = "Herbivore";
+    }
+    if (ui->radioButton_Both->isCheckable()){
+        environment = "Both";
+    }
+    if (ui->radioButton_Outdoor->isCheckable()){
+        environment = "Outdoor";
+    }
+    if (ui->radioButton_Indoor->isCheckable()){
+        environment = "Indoor";
+    }
+    if (ui->radioButton_True->isCheckable()){
+        medication = true;
+    }
+    if (ui->radioButton_False->isCheckable()){
+        medication = false;
+    }
+    if (ui->radioButton_Reproduce_1->isCheckable()){
+        reproductability = 1;
+    }
+    if (ui->radioButton_Reproduce_2->isCheckable()){
+        reproductability = 2;
+    }
+    if (ui->radioButton_Reproduce_3->isCheckable()){
+        reproductability = 3;
+    }
+    if (ui->radioButton_Reproduce_4->isCheckable()){
+        reproductability = 4;
+    }
+    if (ui->radioButton_Reproduce_5->isCheckable()){
+        reproductability = 5;
+    }
+    if (ui->radioButton_Appetite_1->isCheckable()){
+        appetite = 1;
+    }
+    if (ui->radioButton_Appetite_2->isCheckable()){
+        appetite = 2;
+    }
+    if (ui->radioButton_Appetite_3->isCheckable()){
+        appetite = 3;
+    }
+    if (ui->radioButton_Appetite_4->isCheckable()){
+        appetite = 4;
+    }
+    if (ui->radioButton_Appetite_5->isCheckable()){
+        appetite = 5;
+    }
+    if (ui->radioButton_Energy_1->isCheckable()){
+        energyLevel = 1;
+    }
+    if (ui->radioButton_Energy_2->isCheckable()){
+        energyLevel = 2;
+    }
+    if (ui->radioButton_Energy_3->isCheckable()){
+        energyLevel = 3;
+    }
+    if (ui->radioButton_Energy_4->isCheckable()){
+        energyLevel = 4;
+    }
+    if (ui->radioButton_Energy_5->isCheckable()){
+        energyLevel = 5;
+    }
+
+    QSqlQueryModel * queryModel = new QSqlQueryModel();
+
+    QSqlQuery* task = new QSqlQuery(userDatabase);
+
+    task->prepare("insert or replace into animals(id, name, type, breed, gender, age, lifespan, noise, intelligence, adaptability, personality, diet, environment, pastOwners, timeDedication, costDedication, medication, reproductability, appetite, energyLevel, weight, height) values (1, name, type, breed, gender, age, lifespan, noise, intelligence, adaptability, personality, diet, environment, pastOwners, timeDedication, costDedication, medication, reproductability, appetite, energyLevel, weight, height);");
+
+    comm->exec();
+    queryModel->setQuery(*comm);
+    ui->tableView->setModel(queryModel);
+}
